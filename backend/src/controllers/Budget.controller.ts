@@ -28,26 +28,7 @@ export class BudgetController {
   }
 
   static getById = async (req: Request, res: Response) => {
-    try {
-      const { budgetId } = req.params
-
-      const budget = await Budget.findByPk(budgetId)
-
-      if (!budget) {
-        const error = new Error('Presupuesto no encontrado')
-        res.status(404).json({
-          error: error.message
-        })
-      }
-
-      res.status(200).json(budget)
-
-    } catch (error) {
-      console.error('Error al obtener un presupuesto ->>' ,error)
-      res.status(500).json({ 
-        message: 'Hubo un error al obtener un presupuesto'
-      })
-    }
+    res.status(200).json(req.budget)
   }
 
   static create = async (req: Request, res: Response) => {
@@ -69,56 +50,18 @@ export class BudgetController {
   }
 
   static updateById = async (req: Request, res: Response) => {
-    try {
-      const { budgetId } = req.params
-
-      const budget = await Budget.findByPk(budgetId)
-
-      if (!budget) {
-        const error = new Error('Presupuesto no encontrado')
-        res.status(404).json({
-          error: error.message
-        })
-      }
-
       // Modificar el presupuesto
-      await budget.update(req.body)
+      await req.budget.update(req.body)
 
-      res.status(200).json(budget)
-
-    } catch (error) {
-      console.error('Error al actualizar un presupuesto ->>' ,error)
-      res.status(500).json({ 
-        message: 'Hubo un error al actualizar un presupuesto'
-      })
-    }
+      res.status(200).json(req.budget)
   }
 
   static deleteById = async (req: Request, res: Response) => {
-    try {
-      const { budgetId } = req.params
+    // Eliminar logicamente el presupuesto
+    await req.budget.update({ enabled: 0 })
 
-      const budget = await Budget.findByPk(budgetId)
-
-      if (!budget) {
-        const error = new Error('Presupuesto no encontrado')
-        res.status(404).json({
-          error: error.message
-        })
-      }
-
-      // Eliminar logicamente el presupuesto
-      await budget.update({ enabled: 0 })
-
-      res.status(200).json({
-        message: 'Presupuesto eliminado exitosamente'
-      })
-
-    } catch (error) {
-      console.error('Error al obtener un presupuesto ->>' ,error)
-      res.status(500).json({ 
-        message: 'Hubo un error al obtener un presupuesto'
-      })
-    }
+    res.status(200).json({
+      message: 'Presupuesto eliminado exitosamente'
+    })
   }
 }
