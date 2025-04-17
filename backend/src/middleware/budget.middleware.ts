@@ -64,3 +64,14 @@ export const validateBudgetId = async (req: Request, res: Response, next: NextFu
 
   next()
 }
+
+export const hasAccess = async (req: Request, res: Response, next: NextFunction) => {
+  if (req.user.id !== req.budget.userId) {
+    const error = new Error('No tienes acceso a esta acción')
+    res.status(401).json({
+      error: error.message
+    })
+  }
+
+  next()
+}

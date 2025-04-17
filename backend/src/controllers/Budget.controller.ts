@@ -12,11 +12,10 @@ export class BudgetController {
         limit: 10,
         offset: 0,
         where: {
+          userId: req.user.id,
           enabled: 1
         }
       })
-
-      // TODO: Hacer paginación y filtrar por usuario
 
       res.status(200).json(budgets)
 
@@ -29,7 +28,7 @@ export class BudgetController {
   }
 
   static getById = async (req: Request, res: Response) => {
-    /** Budget expense inquiry */
+    /** Consulta de las expensas de un presupuesto */
     const budget = await Budget.findByPk(req.budget.id, {
       include: [Expense]
     })
@@ -39,8 +38,9 @@ export class BudgetController {
 
   static create = async (req: Request, res: Response) => {
     try {
-      const budget = new Budget(req.body)
 
+      const budget = new Budget(req.body)
+      budget.userId = req.user.id
       await budget.save()
 
       res.status(201).json({
@@ -56,14 +56,14 @@ export class BudgetController {
   }
 
   static updateById = async (req: Request, res: Response) => {
-      // Modificar el presupuesto
+      /** Modificar el presupuesto */ 
       await req.budget.update(req.body)
 
       res.status(200).json(req.budget)
   }
 
   static deleteById = async (req: Request, res: Response) => {
-    // Eliminar logicamente el presupuesto
+    /** Eliminar logicamente el presupuesto */
     await req.budget.update({ enabled: 0 })
 
     res.status(200).json({

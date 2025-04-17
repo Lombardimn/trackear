@@ -2,19 +2,23 @@ import express from 'express'
 import morgan from 'morgan'
 import { connetDB } from './db'
 import budgetRouter from '../routes/budget.route'
+import auhtRouter from '../routes/auth.route'
 
 connetDB()
 
 const server = express()
 
-// Limit of requests
+/** Limitador de peticiones */
 //server.use(limiter)
 
-//Middleware
+/** Middlewares */
+
 server.use(morgan('dev'))
 server.use(express.json())
 
-// Routes
+/** Rutas */
+
 server.use('/api/v1/budgets', budgetRouter)
+server.use('/api/v1/auth', auhtRouter)
 
 export default server

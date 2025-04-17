@@ -1,20 +1,24 @@
 import { Router } from "express"
 import { BudgetController } from "../controllers/Budget.controller"
-import { validateBudgetId, validateInputBudgets } from "../middleware/budget.middleware"
-import { budgetExistsMiddleware } from "../middleware/budget.middleware"
 import { ExpensesController } from "../controllers/Expense.controller"
+import { authenticate } from "../middleware/auth.middleware"
 import { handleInputErrors } from "../middleware/validate.middleware"
+import { budgetExistsMiddleware, hasAccess } from "../middleware/budget.middleware"
+import { validateBudgetId, validateInputBudgets } from "../middleware/budget.middleware"
 import { expenseExistsMiddleware, validateExpenseId, validateInputExpenses } from "../middleware/expenses.middleware"
 
 const router = Router()
 
+router.use(authenticate) // req.user
+
 router.param('budgetId', validateBudgetId)
-router.param('budgetId', budgetExistsMiddleware)
+router.param('budgetId', budgetExistsMiddleware) // req.budget
+router.param('budgetId', hasAccess)
 
 router.param('expenseId', validateExpenseId)
 router.param('expenseId', expenseExistsMiddleware)
 
-/** Routes for budgets */
+/** Rutas de presupuestos */
 
 router.get(
   '/',
@@ -46,7 +50,7 @@ router.delete(
 )
 
 
-/** Routes for expenses */
+/** Rutas de gastos */
 
 router.post(
   '/:budgetId/expenses',
