@@ -1,41 +1,16 @@
 import type { Request, Response, NextFunction } from 'express'
-import Budget from '../models/budget.model'
 import { body, param, validationResult } from 'express-validator'
+import Expense from '../models/expense.model'
 
 declare global {
   namespace Express {
     interface Request {
-      budget?: Budget
+      expense?: Expense
     }
   }
 }
 
-export const budgetExistsMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { budgetId } = req.params
-
-    const budget = await Budget.findByPk(budgetId)
-
-    if (!budget) {
-      const error = new Error('Presupuesto no encontrado')
-      res.status(404).json({
-        error: error.message
-      })
-    }
-
-    req.budget = budget
-
-    next()
-
-  } catch (error) {
-    console.error('Error al obtener un presupuesto ->>' ,error)
-    res.status(500).json({ 
-      message: 'Hubo un error al obtener un presupuesto'
-    })
-  }
-}
-
-export const validateInputBudgets = async (req: Request, res: Response, next: NextFunction) => {
+export const validateInputExpenses = async (req: Request, res: Response, next: NextFunction) => {
   await body('name')
     .notEmpty().withMessage('El nombre es requerido')
     .isString().withMessage('El nombre debe ser una cadena de texto')
@@ -50,8 +25,8 @@ export const validateInputBudgets = async (req: Request, res: Response, next: Ne
   next()
 }
 
-export const validateBudgetId = async (req: Request, res: Response, next: NextFunction) => {
-  await param('budgetId')
+export const validateExpenseId = async (req: Request, res: Response, next: NextFunction) => {
+  await param('expenseId')
     .isInt().withMessage('El id debe ser un número entero')
     .custom((value) => value > 0).withMessage('El id debe ser mayor a 0')
     .run(req)
@@ -63,4 +38,29 @@ export const validateBudgetId = async (req: Request, res: Response, next: NextFu
   }
 
   next()
+}
+
+export const expenseExistsMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { expenseId } = req.params
+
+    const expense = await Expense.findByPk(expenseId)
+
+    if (!expense) {
+      const error = new Error('Gasto no encontrado')
+      res.status(404).json({
+        error: error.message
+      })
+    }
+
+    req.expense = expense
+
+    next()
+
+  } catch (error) {
+    console.error('Error al obtener un gasto ->>' ,error)
+    res.status(500).json({ 
+      message: 'Hubo un error al obtener un gasto'
+    })
+  }
 }

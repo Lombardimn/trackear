@@ -1,10 +1,20 @@
 import { Router } from "express"
 import { BudgetController } from "../controllers/Budget.controller"
-import { handleInputErrors } from "../middleware/validate.middleware"
-import { createBudgetValidation, getBudgetByIdValidation } from "../validators/budget.validator"
+import { validateBudgetId, validateInputBudgets } from "../middleware/budget.middleware"
 import { budgetExistsMiddleware } from "../middleware/budget.middleware"
+import { ExpensesController } from "../controllers/Expense.controller"
+import { handleInputErrors } from "../middleware/validate.middleware"
+import { expenseExistsMiddleware, validateExpenseId, validateInputExpenses } from "../middleware/expenses.middleware"
 
 const router = Router()
+
+router.param('budgetId', validateBudgetId)
+router.param('budgetId', budgetExistsMiddleware)
+
+router.param('expenseId', validateExpenseId)
+router.param('expenseId', expenseExistsMiddleware)
+
+/** Routes for budgets */
 
 router.get(
   '/',
@@ -13,42 +23,53 @@ router.get(
 
 router.post(
   '/',
-  [
-    ...createBudgetValidation,
-    handleInputErrors
-  ],
+  validateInputBudgets,
+  handleInputErrors,
   BudgetController.create
 )
 
 router.get(
   '/:budgetId',
-  [
-    ...getBudgetByIdValidation,
-    handleInputErrors
-  ],
-  budgetExistsMiddleware,
   BudgetController.getById
 )
 
 router.put(
   '/:budgetId',
-  [
-    ...getBudgetByIdValidation,
-    ...createBudgetValidation,
-    handleInputErrors
-  ],
-  budgetExistsMiddleware,
+  validateInputBudgets,
+  handleInputErrors,
   BudgetController.updateById
 )
 
 router.delete(
   '/:budgetId',
-  [
-    ...getBudgetByIdValidation,
-    handleInputErrors
-  ],
-  budgetExistsMiddleware,
   BudgetController.deleteById
+)
+
+
+/** Routes for expenses */
+
+router.post(
+  '/:budgetId/expenses',
+  validateInputExpenses,
+  handleInputErrors,
+  ExpensesController.create
+)
+
+router.get(
+  '/:budgetId/expenses/:expenseId',
+  ExpensesController.getById
+)
+
+router.put(
+  '/:budgetId/expenses/:expenseId',
+  validateInputExpenses,
+  handleInputErrors,
+  ExpensesController.updateById
+)
+
+router.delete(
+  '/:budgetId/expenses/:expenseId',
+  ExpensesController.deleteById
 )
 
 export default router
