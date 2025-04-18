@@ -39,7 +39,7 @@ export class BudgetController {
   static create = async (req: Request, res: Response) => {
     try {
 
-      const budget = new Budget(req.body)
+      const budget = await Budget.create(req.body)
       budget.userId = req.user.id
       await budget.save()
 
@@ -59,7 +59,9 @@ export class BudgetController {
       /** Modificar el presupuesto */ 
       await req.budget.update(req.body)
 
-      res.status(200).json(req.budget)
+      res.status(200).json({
+        message: 'Presupuesto actualizado exitosamente'
+      })
   }
 
   static deleteById = async (req: Request, res: Response) => {
