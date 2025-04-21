@@ -17,7 +17,7 @@ router.post(
   body('password')
   .notEmpty().withMessage('La contraseña es requerida')
     .isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres')
-    .custom(value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(value)).withMessage('La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número'),
+    .custom(value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(value)).withMessage('La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número'),
     body('email')
     .notEmpty().withMessage('El email es requerido')
     .isEmail().withMessage('El email es invalido'),
@@ -42,7 +42,7 @@ router.post(
   body('password')
     .notEmpty().withMessage('La contraseña es requerida')
     .isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres')
-    .custom(value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(value)).withMessage('La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número'),
+    .custom(value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(value)).withMessage('La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número'),
   handleInputErrors,
   AuthController.login
 )
@@ -73,7 +73,7 @@ router.post(
   body('password')
     .notEmpty().withMessage('La contraseña es requerida')
     .isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres')
-    .custom(value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(value)).withMessage('La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número'),
+    .custom(value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(value)).withMessage('La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número'),
   handleInputErrors,
   AuthController.resetPasswordWithToken
 )
@@ -92,7 +92,7 @@ router.post(
   body('password')
     .notEmpty().withMessage('La nueva contraseña es requerida')
     .isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres')
-    .custom(value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(value)).withMessage('La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número'),
+    .custom(value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(value)).withMessage('La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número'),
   handleInputErrors,
   AuthController.updatePassword
 )

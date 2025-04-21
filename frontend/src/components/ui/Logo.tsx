@@ -7,7 +7,6 @@ export default function Logo() {
       alt="Logo Trackear"
       width={923}
       height={462}
-      className="h-full"
       priority
     />
   )
