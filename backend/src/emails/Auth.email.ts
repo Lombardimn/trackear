@@ -6,8 +6,8 @@ type EmailType = {
   token: string
 }
 
-const URL_VALIDATION = 'http://localhost:3000/api/v1/auth/confirm-account'
-const URL_RESET = 'http://localhost:3000/api/v1/auth/forgot-password'
+const URL_VALIDATION = 'http://localhost:3000/auth/confirm-account'
+const URL_RESET = 'http://localhost:3000/auth/forgot-password'
 
 export class AuthEmail {
   static sendConfirmationEmail = async ({ name, email, token }: EmailType) => {

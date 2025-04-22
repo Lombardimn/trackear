@@ -21,3 +21,7 @@ export const RegisterSchema = z.object({
 export const errorResponseSchema = z.object({ error: z.string() })
 
 export const successResponseSchema = z.string()
+
+export const tokenSchema = z
+  .string({message: "El token no es valido"})
+  .length(6, { message: "El token debe tener 6 caracteres" })
