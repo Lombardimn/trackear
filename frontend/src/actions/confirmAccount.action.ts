@@ -46,6 +46,6 @@ export async function confirmAccount(token: string, prevState: ActionStateType) 
 
   return {  
     errors: [],
-    success: success
+    success
   }
 }

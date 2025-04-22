@@ -18,6 +18,14 @@ export const RegisterSchema = z.object({
   path: ["password_confirmation"],
 })
 
+export const loginSchema = z.object({
+  email: z.string()
+    .min(1,{ message: "El Email no puede estar vacío"})
+    .email({ message: "El Email no es valido" }),
+  password: z.string()
+    .min(1, { message: "La Contraseña debe tener al menos 8 caracteres" })
+})
+
 export const errorResponseSchema = z.object({ error: z.string() })
 
 export const successResponseSchema = z.string()

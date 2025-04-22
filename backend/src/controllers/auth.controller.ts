@@ -97,15 +97,8 @@ export class AuthController {
 
     /** Generar token */
     const token = generateJWT(user.id)
-
-    res.cookie('token', token, {
-      httpOnly: true, // Evita acceso desde JS en frontend
-      secure: NODE_ENV === 'production', // Solo en HTTPS en producción
-      sameSite: 'strict', // Evita envío en solicitudes de terceros
-      maxAge: 24 * 60 * 60 * 1000 // 1 día de expiración
-    })
-
-    res.status(200).json('Login realizado correctamente')
+ 
+    res.status(200).json(token)
   }
 
   static forgotPassword = async (req: Request, res: Response) => {

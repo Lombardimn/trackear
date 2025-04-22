@@ -19,7 +19,7 @@ export default function RegisterForm() {
   /** Referencia del formulario */
   const ref = useRef<HTMLFormElement>(null)
 
-   // Manejo de visualización de errores en el formulario
+   /** Manejo de visualización de errores en el formulario*/
    const handleSubmit = () => {
     setSubmitCount(prev => prev + 1)
   }
@@ -48,7 +48,7 @@ export default function RegisterForm() {
 
       setSubmitCount(0)
     }
-  }, [state]);
+  }, [state])
 
   return (
     <form
