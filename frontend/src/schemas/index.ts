@@ -26,10 +26,18 @@ export const loginSchema = z.object({
     .min(1, { message: "La Contraseña debe tener al menos 8 caracteres" })
 })
 
-export const errorResponseSchema = z.object({ error: z.string() })
-
-export const successResponseSchema = z.string()
-
 export const tokenSchema = z
   .string({message: "El token no es valido"})
   .length(6, { message: "El token debe tener 6 caracteres" })
+
+export const userSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  email: z.string().email()
+})
+
+export const errorResponseSchema = z.object({ error: z.string() })
+export const successResponseSchema = z.string()
+
+/** Tipos inferidos */
+export type UserType = z.infer<typeof userSchema>

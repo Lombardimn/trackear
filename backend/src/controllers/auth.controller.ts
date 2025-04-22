@@ -168,8 +168,7 @@ export class AuthController {
   }
 
   static user = async (req: Request, res: Response) => {
-    res.status(200).json('Usuario autenticado correctamente')
-    res.json(req.user)
+    res.status(200).json(req.user)
   }
 
   static updatePassword = async (req: Request, res: Response) => {

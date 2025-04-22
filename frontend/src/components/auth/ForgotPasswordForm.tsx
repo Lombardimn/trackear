@@ -26,7 +26,7 @@ export default function ForgotPasswordForm() {
             type="submit"
             value="Solicitar"
             method={() => { }}
-            classname="w-auto p-3 rounded-2xl flex flex-row items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 font-roboto text-xl cursor-pointer transition-colors duration-300 shadow-md text-white"
+            classname="w-auto p-3 rounded-2xl flex flex-row items-center justify-center gap-2 bg-green-500 hover:bg-green-800 font-roboto text-xl cursor-pointer transition-colors duration-300 shadow-md text-white"
           />
         </div>
       </div>
