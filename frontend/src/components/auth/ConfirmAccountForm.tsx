@@ -26,6 +26,11 @@ export default function ConfirmAccountForm() {
       })
     }
 
+    setIsComplete(false)
+    setToken('')
+  }, [isComplete])
+
+  useEffect(() => {
     /** Avisos */
     if (state.errors && state.errors.length > 0) {
       toast.error('Ups! Hubo un Error',{
@@ -45,10 +50,7 @@ export default function ConfirmAccountForm() {
         }
       })
     }
-
-    setIsComplete(false)
-    setToken('')
-  }, [isComplete, state, router])
+  }, [state, router])
 
   /** Actualiza el token en la carga */
   const HandleChange = (token: string) => {

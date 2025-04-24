@@ -17,3 +17,7 @@ export const EMAIL_PASS = process.env.MTMAIL_PASS || process.env.GMAIL_PASS
 // JWT
 export const JWT_SECRET = process.env.SECRET_JWT_KEY
 export const NODE_ENV = process.env.NODE_ENV
+
+// URLs
+export const URL_RESET = process.env.URL_RESET
+export const URL_VALIDATION = process.env.URL_VALIDATION

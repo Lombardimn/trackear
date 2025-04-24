@@ -12,6 +12,23 @@
   }
 }
 
+@theme default {
+  --animate-fly-away: fly-away 2s ease-in-out forwards;
+}
+
+@keyframes fly-away {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1)
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100px, -100px) scale(0.5);
+  }
+}
+
+
+
 body {
   background: var(--background);
   color: var(--foreground);

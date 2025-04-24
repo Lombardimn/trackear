@@ -26,6 +26,21 @@ export const loginSchema = z.object({
     .min(1, { message: "La Contraseña debe tener al menos 8 caracteres" })
 })
 
+export const forgotPasswordSchema = z.object({
+  email: z.string()
+    .min(1, { message: 'El Email es Obligatorio' })
+    .email({ message: 'Email no válido' })
+})
+
+export const resetPasswordSchema = z.object({
+  password: z.string()
+          .min(8, {message: 'El Password debe ser de al menos 8 caracteres'}),
+  password_confirmation: z.string()
+}).refine((data) => data.password === data.password_confirmation, {
+  message: "Los Passwords no son iguales",
+  path: ["password_confirmation"]
+})
+
 export const tokenSchema = z
   .string({message: "El token no es valido"})
   .length(6, { message: "El token debe tener 6 caracteres" })

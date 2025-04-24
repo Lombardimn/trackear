@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function LoginPage() {
   return (
     <>
-      <div className="mt-8 px-8 space-y-3 w-full">
+      <div className="pt-4 px-8 space-y-3 w-full">
         <h1 className="text-6xl font-black text-green-500">Inicia Sesión</h1>
         <p className="text-3xl font-bold text-gray-800">
           y controla tus

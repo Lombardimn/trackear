@@ -1,14 +1,60 @@
-"use client";
+"use client"
 
-import { Envelope } from "@phosphor-icons/react";
+import { Envelope, SealCheck, Siren } from "@phosphor-icons/react";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
+import { useActionState, useEffect, useState } from "react";
+import { forgotPassword } from "@/actions/forgotPassword.action";
+import { getFieldError } from "@/utilities";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function ForgotPasswordForm() {
+  const router = useRouter()
+  const [submitCount, setSubmitCount] = useState<number>(0) // Contador de envíos
+  const [state, dispatch] = useActionState(forgotPassword, {
+    errors: [],
+    success: ''
+  })
+
+  /** Manejo de visualización de errores en el formulario*/
+  const handleSubmit = () => {
+    setSubmitCount(prev => prev + 1)
+  }
+
+  useEffect(() => {
+    const error = getFieldError("global", state.errors)
+    const success = state.success
+
+    /** Avisos */
+    if (error) {
+      toast.error('Ups! Hubo un Error', {
+        description: error,
+        duration: 3000,
+        icon: <Siren size={24} weight="duotone" />
+      })
+    }
+
+    if (success !== '') {
+      toast.success('Petició́n Exitosa', {
+        description: success,
+        duration: 3000,
+        icon: <SealCheck size={24} weight="duotone" />,
+        onAutoClose: () => {
+          router.push('/statuses')
+        }
+      })
+
+      setSubmitCount(0)
+    }
+  }, [state, router])
+
   return (
     <form
       className="mt-8 px-4 space-y-3 w-full"
       noValidate
+      action={dispatch}
+      onSubmit={handleSubmit}
     >
       <div className="pb-5">
         <Input
@@ -18,6 +64,8 @@ export default function ForgotPasswordForm() {
           name="email"
           label="Email"
           autoComplete="email"
+          error={getFieldError("email", state.errors)}
+          submitCount={submitCount}
           icon={<Envelope size={24} color="inherit" weight="duotone" />}
         />
 
