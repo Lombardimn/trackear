@@ -43,9 +43,7 @@ export class BudgetController {
       budget.userId = req.user.id
       await budget.save()
 
-      res.status(201).json({
-        message: 'Presupuesto creado exitosamente',
-      })
+      res.status(201).json('Presupuesto creado exitosamente')
 
     } catch (error) {
       console.error('Error al crear un presupuesto ->>' ,error)
@@ -59,17 +57,13 @@ export class BudgetController {
       /** Modificar el presupuesto */ 
       await req.budget.update(req.body)
 
-      res.status(200).json({
-        message: 'Presupuesto actualizado exitosamente'
-      })
+      res.status(200).json('Presupuesto actualizado exitosamente')
   }
 
   static deleteById = async (req: Request, res: Response) => {
     /** Eliminar logicamente el presupuesto */
     await req.budget.update({ enabled: 0 })
 
-    res.status(200).json({
-      message: 'Presupuesto eliminado exitosamente'
-    })
+    res.status(200).json('Presupuesto eliminado exitosamente')
   }
 }

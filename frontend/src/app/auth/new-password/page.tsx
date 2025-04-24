@@ -1,4 +1,9 @@
 import PasswordResetHandler from "@/components/auth/PasswordResetHandler";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Trackear | Reestablece tu contraseña"
+}
 
 export default function NewPasswordPage() {
   return (

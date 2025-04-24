@@ -10,7 +10,7 @@ export default async function DashboardPage() {
         </p>
       </div>
       <Link
-        href={'/admin/budget/new'}
+        href={'/dashboard/budgets/new'}
         className="w-auto p-3 rounded-2xl flex flex-row items-center justify-center gap-2 bg-green-500 hover:bg-green-800 font-roboto text-xl cursor-pointer transition-colors duration-300 shadow-md text-white"
       >
         Crear Presupuesto

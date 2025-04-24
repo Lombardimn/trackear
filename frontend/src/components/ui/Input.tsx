@@ -20,6 +20,10 @@ interface InputProps<T extends InputType> {
   error?: string
   autoComplete?: AutoComplete
   submitCount?: number
+  value?: T extends "number" ? number : string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void
 }
 
 export default function Input(props: InputProps<InputType>) {
@@ -31,7 +35,6 @@ export default function Input(props: InputProps<InputType>) {
   const inputType = isPasswordType && props.variant
     ? (showPassword ? "text" : "password")
     : props.type
-
 
   // Manejo de errores
   useEffect(() => {
@@ -72,7 +75,14 @@ export default function Input(props: InputProps<InputType>) {
         placeholder={props.placeholder}
         defaultValue={props.defaultValue}
         autoComplete={props.autoComplete}
-        onChange={() => { if (localError) setLocalError(undefined) }}
+        onBlur={props.onBlur}
+        onFocus={props.onFocus}
+        onChange={(e) => {
+          if (localError) {
+            setLocalError(undefined)
+            props.onChange?.(e)
+          }
+        }}
         className={`w-full border border-gray-300 p-3 rounded-lg ${props.icon ? "pl-12" : "pl-3"} ${localError ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "focus:border-green-600 focus:ring-green-600 hover:border-green-600 hover:ring-green-600"} ${props.className}`}
       />
       {

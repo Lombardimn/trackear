@@ -1,5 +1,10 @@
 import ConfirmAccountForm from "@/components/auth/ConfirmAccountForm";
 import Card from "@/components/ui/Card";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Trackear | Confirmar Cuenta"
+}
 
 export default function ConfirmAccountPage() {
   return (
