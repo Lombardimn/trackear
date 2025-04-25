@@ -1,7 +1,7 @@
 "use server"
 
 import { draftBudgetSchema, errorResponseSchema, successResponseSchema } from "@/schemas";
-import { cookies } from "next/headers";
+import { getToken } from "@/utilities/getToken.util";
 
 type ActionStateType = {
   errors: Array<{ path: string; message: string }>
@@ -29,7 +29,7 @@ export async function createBudgetAction(prev: ActionStateType, formData: FormDa
 
   }
 
-  const token = (await cookies()).get('TRACKEAR_TOKEN')?.value
+  const token = await getToken()
   const URL = `${process.env.API_URL}/budgets`
 
   const req = await fetch(URL, {

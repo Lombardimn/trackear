@@ -5,7 +5,7 @@ import { Envelope, Lock, Siren } from "@phosphor-icons/react"
 import Button from "@/components/ui/Button"
 import { authenticateUser } from "@/actions/authenticateUser.action"
 import { useActionState, useEffect, useState } from "react"
-import { getFieldError } from "@/utilities"
+import { getFieldError } from "@/utilities/getFieldError.util"
 import { toast } from "sonner"
 
 export default function LoginForm() {

@@ -5,7 +5,7 @@ import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useActionState, useEffect, useState } from "react";
 import { forgotPassword } from "@/actions/forgotPassword.action";
-import { getFieldError } from "@/utilities";
+import { getFieldError } from "@/utilities/getFieldError.util";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 

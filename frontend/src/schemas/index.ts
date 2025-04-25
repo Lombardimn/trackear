@@ -53,14 +53,25 @@ export const userSchema = z.object({
 
 export const draftBudgetSchema = z.object({
   name: z.string()
-          .min(1, {message: 'El Nombre del presupuesto es obligatorio'}),
+    .min(1, { message: 'El Nombre del presupuesto es obligatorio' }),
   amount: z.coerce.
-          number({message: 'Cantidad no válida'})
-          .min(1, {message: 'Cantidad no válida'}),
+    number({ message: 'Cantidad no válida' })
+    .min(1, { message: 'Cantidad no válida' }),
+})
+
+export const budgetAPIResponseSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  amount: z.string(),
+  userId: z.number(),
+  createdAt: z.string(),
+  updatedAt: z.string()
 })
 
 export const errorResponseSchema = z.object({ error: z.string() })
 export const successResponseSchema = z.string()
+export const budgetAPI = z.array(budgetAPIResponseSchema)
 
 /** Tipos inferidos */
 export type UserType = z.infer<typeof userSchema>
+export type BudgetType = z.infer<typeof budgetAPIResponseSchema>

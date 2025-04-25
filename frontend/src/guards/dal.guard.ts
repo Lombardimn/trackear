@@ -1,11 +1,11 @@
 import 'server-only'
 import { userSchema } from "@/schemas"
-import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { cache } from "react"
+import { getToken } from '@/utilities/getToken.util'
 
 export const verifySession = cache( async () => {
-  const token = (await cookies()).get('TRACKEAR_TOKEN')?.value
+  const token = await getToken()
   if (!token) {
     return redirect('/auth/login')
   }

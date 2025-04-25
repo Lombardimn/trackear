@@ -5,7 +5,7 @@ import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { Register } from "@/actions/createAccount.action";
 import { useActionState, useEffect, useRef, useState } from "react";
-import { getFieldError } from "@/utilities";
+import { getFieldError } from "@/utilities/getFieldError.util";
 import { toast } from 'sonner';
 import { SealCheck, Siren } from "@phosphor-icons/react";
 

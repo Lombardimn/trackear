@@ -17,19 +17,19 @@ export default async function DashboardLayout({
   const { user } = await verifySession()
 
   return (
-    <main className="min-h-screen bg-green-50">
+    <div className="flex flex-col min-h-screen">
       <Header user={user} />
-
-      <section className='max-w-6xl mx-auto py-8'>
-        {children}
-      </section>
-      <Toaster
-        position="top-right"
-        duration={3000}
-        richColors
-      />
-
+      <main className="bg-green-50 mt-14 flex-1">
+        <div className='max-w-6xl mx-auto py-8'>
+          {children}
+        </div>
+        <Toaster
+          position="top-right"
+          duration={3000}
+          richColors
+        />
+      </main>
       <Footer />
-    </main>
+    </div>
   );
 }

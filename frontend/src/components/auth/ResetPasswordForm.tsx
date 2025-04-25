@@ -3,7 +3,7 @@ import { Lock, SealCheck, Siren } from "@phosphor-icons/react";
 import Button from "../ui/Button";
 import { useActionState, useEffect, useState } from "react";
 import { resetPasswordAction } from "@/actions/resetPassword.action";
-import { getFieldError } from "@/utilities";
+import { getFieldError } from "@/utilities/getFieldError.util";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
