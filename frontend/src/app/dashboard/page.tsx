@@ -25,7 +25,6 @@ async function getUserBudgets() {
 export default async function DashboardPage() {
 
   const budgets = await getUserBudgets()
-  console.log(budgets)
 
   return (
     <>

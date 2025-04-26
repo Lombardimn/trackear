@@ -36,7 +36,7 @@ export default function BudgetMenu({ budgetId }: { budgetId: BudgetType['id'] })
             </MenuItem>
             <MenuItem>
               <Link
-                href={``}
+                href={`/dashboard/budgets/${budgetId}/edit`}
                 className='flex gap-2 px-3 py-1 text-sm leading-6 text-gray-800'
               >
                 <Pen size={24} weight="duotone" />
