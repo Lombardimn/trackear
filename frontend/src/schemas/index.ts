@@ -68,6 +68,7 @@ export const budgetAPIResponseSchema = z.object({
   updatedAt: z.string()
 })
 
+export const passwordValidationSchema = z.string().min(1, { message: 'La contraseña es obligatoria' })
 export const errorResponseSchema = z.object({ error: z.string() })
 export const successResponseSchema = z.string()
 export const budgetAPI = z.array(budgetAPIResponseSchema)

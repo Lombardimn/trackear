@@ -1,5 +1,7 @@
 import BudgetMenu from "@/components/dashboard/BudgetMenu";
+import ConfirmPasswordForm from "@/components/dashboard/ConfirmPassForm";
 import Card from "@/components/ui/Card";
+import Modal from "@/components/ui/Modal";
 import { budgetAPI } from "@/schemas";
 import { formatCurrency } from "@/utilities/FormatCurrency.util";
 import { formatDate } from "@/utilities/FormatDate.util";
@@ -47,9 +49,10 @@ export default async function DashboardPage() {
           {
             budgets.length
               ? (
-                <ul role="list" className=" py-4 divide-y divide-gray-300 w-full px-4">
-                  {budgets.map((budget) => (
-                    <li key={budget.id} className="flex justify-between gap-x-6 p-5">
+                <>
+                  <ul role="list" className=" py-4 divide-y divide-gray-300 w-full px-4">
+                    {budgets.map((budget) => (
+                      <li key={budget.id} className="flex justify-between gap-x-6 p-5">
                         <div className="flex min-w-0 gap-x-4">
                           <div className="min-w-0 flex-auto space-y-2">
                             <p className="text-2xl font-semibold leading-6 text-gray-800">
@@ -74,9 +77,13 @@ export default async function DashboardPage() {
                         <div className="flex shrink-0 items-center gap-x-6">
                           <BudgetMenu budgetId={budget.id} />
                         </div>
-                    </li>
-                  ))}
-                </ul>
+                      </li>
+                    ))}
+                  </ul>
+                  <Modal>
+                    <ConfirmPasswordForm />
+                  </Modal>
+                </>
               )
               : (
                 <div className="flex flex-col items-center justify-center py-6">

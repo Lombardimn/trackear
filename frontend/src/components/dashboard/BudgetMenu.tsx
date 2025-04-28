@@ -4,10 +4,13 @@ import { BudgetType } from '@/schemas'
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import { DotsThreeOutlineVertical, Pen, Receipt, Trash } from '@phosphor-icons/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Fragment } from 'react'
 
 
 export default function BudgetMenu({ budgetId }: { budgetId: BudgetType['id'] }) {
+  const router = useRouter()
+
   return (
     <>
       <Menu as="div" className="relative flex-none">
@@ -48,7 +51,7 @@ export default function BudgetMenu({ budgetId }: { budgetId: BudgetType['id'] })
               <button
                 type='button'
                 className='flex gap-2 px-3 py-1 text-sm leading-6 text-red-500'
-                onClick={ () => {} }
+                onClick={ () => router.push(`?deleteBudgetId=${budgetId}`) }
               >
                 <Trash size={24} weight="duotone" />
                 Eliminar Presupuesto

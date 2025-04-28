@@ -2,6 +2,7 @@
 
 import { draftBudgetSchema, errorResponseSchema, successResponseSchema } from "@/schemas";
 import { getToken } from "@/utilities/getToken.util";
+import { revalidatePath } from "next/cache";
 
 type ActionStateType = {
   errors: Array<{ path: string; message: string }>
@@ -60,6 +61,8 @@ export async function createBudgetAction(prev: ActionStateType, formData: FormDa
   const res = await req.json()
 
   const success = successResponseSchema.parse(res)
+
+  revalidatePath('/dashboard')
 
   return {
     errors: [],
