@@ -51,7 +51,7 @@ export default function BudgetMenu({ budgetId }: { budgetId: BudgetType['id'] })
               <button
                 type='button'
                 className='flex gap-2 px-3 py-1 text-sm leading-6 text-red-500'
-                onClick={ () => router.push(`?deleteBudgetId=${budgetId}`) }
+                onClick={ () => router.push(`?deleteBudgetId=${budgetId}&showModal=true`) }
               >
                 <Trash size={24} weight="duotone" />
                 Eliminar Presupuesto

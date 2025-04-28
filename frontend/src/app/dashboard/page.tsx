@@ -1,5 +1,4 @@
 import BudgetMenu from "@/components/dashboard/BudgetMenu";
-import ConfirmPasswordForm from "@/components/dashboard/ConfirmPassForm";
 import Card from "@/components/ui/Card";
 import Modal from "@/components/ui/Modal";
 import { budgetAPI } from "@/schemas";
@@ -51,38 +50,38 @@ export default async function DashboardPage() {
               ? (
                 <>
                   <ul role="list" className=" py-4 divide-y divide-gray-300 w-full px-4">
-                    {budgets.map((budget) => (
-                      <li key={budget.id} className="flex justify-between gap-x-6 p-5">
-                        <div className="flex min-w-0 gap-x-4">
-                          <div className="min-w-0 flex-auto space-y-2">
-                            <p className="text-2xl font-semibold leading-6 text-gray-800">
-                              <Link
-                                href={`/dashboard/budgets/${budget.id}`}
-                                className="hover:text-green-600"
-                              >
-                                {budget.name}
-                              </Link>
-                            </p>
-                            <p className="text-xl font-bold text-emerald-600">
-                              {formatCurrency(Number(budget.amount))}
-                            </p>
-                            <p className='text-gray-500 text-sm'>
-                              Ultima actualizacion:{' '}
-                              <span className="font-bold">
-                                {formatDate(budget.updatedAt)}
-                              </span>
-                            </p>
+                    {
+                      budgets.map((budget) => (
+                        <li key={budget.id} className="flex justify-between gap-x-6 p-5">
+                          <div className="flex min-w-0 gap-x-4">
+                            <div className="min-w-0 flex-auto space-y-2">
+                              <p className="text-2xl font-semibold leading-6 text-gray-800">
+                                <Link
+                                  href={`/dashboard/budgets/${budget.id}`}
+                                  className="hover:text-green-600"
+                                >
+                                  {budget.name}
+                                </Link>
+                              </p>
+                              <p className="text-xl font-bold text-emerald-600">
+                                {formatCurrency(Number(budget.amount))}
+                              </p>
+                              <p className='text-gray-500 text-sm'>
+                                Ultima actualizacion:{' '}
+                                <span className="font-bold">
+                                  {formatDate(budget.updatedAt)}
+                                </span>
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                        <div className="flex shrink-0 items-center gap-x-6">
-                          <BudgetMenu budgetId={budget.id} />
-                        </div>
-                      </li>
-                    ))}
+                          <div className="flex shrink-0 items-center gap-x-6">
+                            <BudgetMenu budgetId={budget.id} />
+                          </div>
+                        </li>
+                      ))
+                    }
                   </ul>
-                  <Modal>
-                    <ConfirmPasswordForm />
-                  </Modal>
+                  <Modal />
                 </>
               )
               : (

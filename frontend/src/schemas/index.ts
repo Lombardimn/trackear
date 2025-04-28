@@ -59,19 +59,41 @@ export const draftBudgetSchema = z.object({
     .min(1, { message: 'Cantidad no válida' }),
 })
 
+export const expenseAPIResponseSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  amount: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  budgetId: z.number()
+})
+
 export const budgetAPIResponseSchema = z.object({
   id: z.number(),
   name: z.string(),
   amount: z.string(),
   userId: z.number(),
   createdAt: z.string(),
-  updatedAt: z.string()
+  updatedAt: z.string(),
+  expenses: z.array(expenseAPIResponseSchema)
 })
+
+export const expensesSchema = z.object({
+  name: z.string()
+    .min(1, { message: 'El Nombre del gasto es obligatorio' }),
+  amount: z.coerce
+    .number({ message: 'Cantidad no válida' })
+    .min(1, { message: 'Cantidad no válida' }),
+})
+
+export const budgetAPI = z.array(
+  budgetAPIResponseSchema
+    .omit({ expenses: true })
+)
 
 export const passwordValidationSchema = z.string().min(1, { message: 'La contraseña es obligatoria' })
 export const errorResponseSchema = z.object({ error: z.string() })
 export const successResponseSchema = z.string()
-export const budgetAPI = z.array(budgetAPIResponseSchema)
 
 /** Tipos inferidos */
 export type UserType = z.infer<typeof userSchema>

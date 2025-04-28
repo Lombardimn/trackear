@@ -29,11 +29,11 @@ export default function ConfirmPasswordForm() {
   /** Manejo del cierre de modal */
   const closeModal = useCallback(() => {
     const params = new URLSearchParams(searchParams.toString())
-    params.delete('deleteBudgetId')
-    const newSearch = params.toString()
-  
-    const newUrl = newSearch ? `${pathname}?${newSearch}` : pathname
-    router.replace(newUrl)
+    Array.from(params.entries()).forEach(([key]) => {
+      params.delete(key)
+    })
+    
+    router.replace(`${pathname}?${params}`)
   }, [searchParams, pathname, router])
 
   /** Manejo de envíos */
