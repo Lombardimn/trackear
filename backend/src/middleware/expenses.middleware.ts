@@ -64,3 +64,14 @@ export const expenseExistsMiddleware = async (req: Request, res: Response, next:
     })
   }
 }
+
+export const belongsToBudgetMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+  if (req.budget.id !== req.expense.budgetId) {
+    const error = new Error('No tienes acceso a esta acción')
+    res.status(403).json({
+      error: error.message
+    })
+  }
+
+  next()
+}

@@ -5,7 +5,7 @@ import { authenticate } from "../middleware/auth.middleware"
 import { handleInputErrors } from "../middleware/validate.middleware"
 import { budgetExistsMiddleware, hasAccess } from "../middleware/budget.middleware"
 import { validateBudgetId, validateInputBudgets } from "../middleware/budget.middleware"
-import { expenseExistsMiddleware, validateExpenseId, validateInputExpenses } from "../middleware/expenses.middleware"
+import { belongsToBudgetMiddleware, expenseExistsMiddleware, validateExpenseId, validateInputExpenses } from "../middleware/expenses.middleware"
 
 const router = Router()
 
@@ -17,6 +17,7 @@ router.param('budgetId', hasAccess)
 
 router.param('expenseId', validateExpenseId)
 router.param('expenseId', expenseExistsMiddleware)
+router.param('expenseId', belongsToBudgetMiddleware)
 
 /** Rutas de presupuestos */
 

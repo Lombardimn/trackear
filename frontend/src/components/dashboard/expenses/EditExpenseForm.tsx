@@ -101,7 +101,7 @@ export default function EditExpenseForm({ closeModal }: { closeModal: () => void
             <Button
               variant
               type="button"
-              href={'/dashboard'}
+              href={`/dashboard/budgets/${budgetId}`}
               value="Cancelar"
               classname="w-auto p-3 rounded-2xl flex flex-row items-center justify-center gap-2 bg-red-500 hover:bg-red-800 font-roboto text-xl cursor-pointer transition-colors duration-300 shadow-md text-white"
             />

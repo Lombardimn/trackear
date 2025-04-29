@@ -29,7 +29,7 @@ export default function ExpenseMenu({ expenseId }: { expenseId: ExpenseType['id'
           classname="flex gap-2 px-3 py-1 text-sm leading-6 !text-red-500 bg-transparent hover:bg-transparent"
           icon={<Trash size={24} weight="duotone" />}
           method={() => {
-            router.push(location.pathname + '?deleteExpense=true&showModal=true')
+            router.push(location.pathname + `?showModal=true&deleteExpenseId=${expenseId}`)
           }}
         />
       </MenuItem>

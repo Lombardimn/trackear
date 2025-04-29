@@ -28,7 +28,7 @@ export default function Modal() {
   const confirmPassword = searchParams.get('deleteBudgetId')
   const addExpense = searchParams.get('addExpense')
   const editExpense = searchParams.get('editExpenseId')
-  const deleteExpense = searchParams.get('deleteExpense')
+  const deleteExpense = searchParams.get('deleteExpenseId')
 
   const getComponentName = () => {
     if (confirmPassword) return 'ConfirmPassword'
