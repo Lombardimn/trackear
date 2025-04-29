@@ -98,3 +98,5 @@ export const successResponseSchema = z.string()
 /** Tipos inferidos */
 export type UserType = z.infer<typeof userSchema>
 export type BudgetType = z.infer<typeof budgetAPIResponseSchema>
+export type ExpenseType = z.infer<typeof expenseAPIResponseSchema>
+export type ExpenseTypeFromAPI = z.infer<typeof expensesSchema>

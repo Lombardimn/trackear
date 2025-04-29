@@ -34,7 +34,7 @@ export default function Button({
           ? (
             <Link
               href={href}
-              className = {`${classname} w-auto ${textColor} font-roboto text-xl cursor-pointer block transition-colors duration-300 ${bgColor} shadow-md`}
+              className = {`${classname} w-auto ${textColor} cursor-pointer block transition-colors duration-300 ${bgColor}`}
             >
               { icon && <span>{icon}</span> }
               <p className={value ? "block" : "hidden"}>
@@ -48,7 +48,7 @@ export default function Button({
               type = { type }
               value = { value }
               onClick = { method }
-              className = {`${classname} w-auto ${textColor} font-roboto text-xl cursor-pointer block transition-colors duration-300 ${bgColor} shadow-md`}
+              className = {`${classname} w-auto ${textColor} cursor-pointer block transition-colors duration-300 ${bgColor}`}
             >
               { icon && <span>{icon}</span> }
               <p className={value ? "block" : "hidden"}>

@@ -1,7 +1,9 @@
 import AddExpenseButton from "@/components/dashboard/expenses/AddExpenseButton"
+import ExpenseMenu from "@/components/dashboard/expenses/ExpenseMenu"
 import Button from "@/components/ui/Button"
 import Card from "@/components/ui/Card"
 import Modal from "@/components/ui/Modal"
+import OptionMenuContainer from "@/components/ui/OptionMenuContainer"
 import { getBudget } from "@/services/budgets.service"
 import { formatCurrency } from "@/utilities/FormatCurrency.util"
 import { formatDate } from "@/utilities/FormatDate.util"
@@ -72,7 +74,9 @@ export default async function BudgetPage({ params }: { params: { id: string } })
                         </div>
                       </div>
                       <div className="flex shrink-0 items-center gap-x-6">
-                        {/* <BudgetMenu budgetId={budget.id} /> */}
+                        <OptionMenuContainer>
+                          <ExpenseMenu expenseId={expense.id} />
+                        </OptionMenuContainer>
                       </div>
                     </li>
                     ))

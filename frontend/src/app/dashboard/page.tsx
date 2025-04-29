@@ -1,6 +1,7 @@
 import BudgetMenu from "@/components/dashboard/BudgetMenu";
 import Card from "@/components/ui/Card";
 import Modal from "@/components/ui/Modal";
+import OptionMenuContainer from "@/components/ui/OptionMenuContainer";
 import { budgetAPI } from "@/schemas";
 import { formatCurrency } from "@/utilities/FormatCurrency.util";
 import { formatDate } from "@/utilities/FormatDate.util";
@@ -75,7 +76,9 @@ export default async function DashboardPage() {
                             </div>
                           </div>
                           <div className="flex shrink-0 items-center gap-x-6">
-                            <BudgetMenu budgetId={budget.id} />
+                            <OptionMenuContainer>
+                              <BudgetMenu budgetId={budget.id} />
+                            </OptionMenuContainer>
                           </div>
                         </li>
                       ))

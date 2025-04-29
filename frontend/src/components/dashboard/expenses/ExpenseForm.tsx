@@ -1,4 +1,5 @@
 import Input from "@/components/ui/Input";
+import { ExpenseTypeFromAPI } from "@/schemas";
 import { getFieldError } from "@/utilities/getFieldError.util";
 import { HandCoins, ReceiptX } from "@phosphor-icons/react";
 
@@ -12,7 +13,7 @@ export default function ExpenseForm({
     message: string;
   }[],
 submitCount: number,
- expenses?: any
+ expenses?: ExpenseTypeFromAPI
 }) {
   return (
     <>
@@ -25,7 +26,7 @@ submitCount: number,
           label="Nombre del registro"
           error={getFieldError("name", errors)}
           submitCount={submitCount}
-          //defaultValue={expenses?.name}
+          defaultValue={expenses?.name}
           icon={<ReceiptX size={24} color="inherit" weight="duotone" />}
         />
       </div>
@@ -39,7 +40,7 @@ submitCount: number,
           label="Costo"
           error={getFieldError("amount", errors)}
           submitCount={submitCount}
-          //defaultValue={expenses?.amount}
+          defaultValue={expenses?.amount}
           icon={<HandCoins size={24} color="inherit" weight="duotone" />}
         />
       </div>

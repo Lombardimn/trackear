@@ -27,7 +27,7 @@ export default function Modal() {
   /** Identificar el componente a renderizar */
   const confirmPassword = searchParams.get('deleteBudgetId')
   const addExpense = searchParams.get('addExpense')
-  const editExpense = searchParams.get('editExpense')
+  const editExpense = searchParams.get('editExpenseId')
   const deleteExpense = searchParams.get('deleteExpense')
 
   const getComponentName = () => {
