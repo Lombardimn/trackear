@@ -1,17 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 @theme default {
   --animate-fly-away: fly-away 2s ease-in-out forwards;
 }
@@ -25,11 +13,4 @@
     opacity: 0;
     transform: translateY(100px, -100px) scale(0.5);
   }
-}
-
-
-
-body {
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
