@@ -57,7 +57,6 @@ const PaperPlaneAnimation: FC<Props> = ({
              {/* No es estrictamente necesario el flex aquí si el ícono ya ocupa el tamaño */}
             <div
               style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
-              xmlns="http://www.w3.org/1999/xhtml" // Necesario para contenido HTML dentro de SVG
             >
               <PaperPlaneRight
                 color={color}

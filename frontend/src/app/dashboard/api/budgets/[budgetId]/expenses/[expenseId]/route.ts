@@ -1,12 +1,11 @@
 import { verifySession } from "@/guards/dal.guard"
 import { getToken } from "@/utilities/getToken.util"
+import { NextRequest, NextResponse } from "next/server"
 
-interface Params {
-  budgetId: string,
-  expenseId: string
-}
-
-export async function GET(request: Request, {params}: {params: Params}) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ budgetId: string; expenseId: string }> }
+) {
   /** Verificar sesion activa */
   await verifySession()
 
@@ -20,11 +19,11 @@ export async function GET(request: Request, {params}: {params: Params}) {
     }
   })
 
-  const res = await req.json()
+  const json = await req.json()
   
   if (!req.ok) {
-    return Response.json(res.error, { status: 403 })
+    return NextResponse.json({ error: json.error }, { status: req.status })
   }
-
-  return Response.json(res)
+ 
+  return NextResponse.json(json)
 }

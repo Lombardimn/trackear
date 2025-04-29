@@ -1,10 +1,9 @@
 import EditBudgetForm from "@/components/dashboard/EditBudgetForm"
 import Card from "@/components/ui/Card"
 import { getBudget } from "@/services/budgets.service"
-import { Metadata } from "next"
 import Link from "next/link"
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params:  Promise<{ id: string }> }) {
   const { id } = await params
   const budget = await getBudget(id)
 
@@ -14,7 +13,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   }
 }
 
-export default async function EditBudgetPage({ params }: { params: { id: string } }) {
+export default async function EditBudgetPage({ params }: { params:  Promise<{ id: string }> }) {
   const { id } = await params
 
   const budget = await getBudget(id)

@@ -10,9 +10,8 @@ import { getBudget } from "@/services/budgets.service"
 import { formatCurrency } from "@/utilities/FormatCurrency.util"
 import { formatDate } from "@/utilities/FormatDate.util"
 import { DotsThreeOutline, Ghost } from "@phosphor-icons/react/dist/ssr"
-import { Metadata } from "next"
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params:  Promise<{ id: string }> }) {
   const { id } = await params
   const budget = await getBudget(id)
 
@@ -22,7 +21,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   }
 }
 
-export default async function BudgetPage({ params }: { params: { id: string } }) {
+export default async function BudgetPage({ params }: { params:  Promise<{ id: string }> }) {
   const { id } = await params
   const budget = await getBudget(id)
 
