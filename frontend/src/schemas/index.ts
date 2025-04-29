@@ -34,10 +34,10 @@ export const forgotPasswordSchema = z.object({
 
 export const resetPasswordSchema = z.object({
   password: z.string()
-    .min(8, { message: 'El Password debe ser de al menos 8 caracteres' }),
+    .min(8, { message: 'La Contraseña debe tener al menos 8 caracteres' }),
   password_confirmation: z.string()
 }).refine((data) => data.password === data.password_confirmation, {
-  message: "Los Passwords no son iguales",
+  message: "Las contraseñas no son iguales",
   path: ["password_confirmation"]
 })
 
@@ -90,6 +90,17 @@ export const budgetAPI = z.array(
   budgetAPIResponseSchema
     .omit({ expenses: true })
 )
+
+export const updatePasswordSchema = z.object({
+  current_password: z.string()
+    .min(1, { message: 'La contraseña es obligatoria' }),
+  password: z.string()
+    .min(8, { message: 'La nueva contraseña debe ser de al menos 8 caracteres' }),
+  password_confirmation: z.string()
+}).refine((data) => data.password === data.password_confirmation, {
+  message: "Las contraseñas no son iguales",
+  path: ["password_confirmation"]
+})
 
 export const passwordValidationSchema = z.string().min(1, { message: 'La contraseña es obligatoria' })
 export const errorResponseSchema = z.object({ error: z.string() })

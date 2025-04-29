@@ -85,7 +85,7 @@ router.get(
 )
 
 router.post(
-  'update-password',
+  '/update-password',
   authenticate,
   body('current_password')
     .notEmpty().withMessage('La contraseña actual es requerida'),
