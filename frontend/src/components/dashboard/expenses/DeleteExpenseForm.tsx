@@ -2,7 +2,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { DialogTitle } from "@headlessui/react";
 import Button from "@/components/ui/Button";
 import deleteExpenseAction from "@/actions/deleteExpense.action";
-import { useActionState, useEffect } from "react";
+import { startTransition, useActionState, useEffect } from "react";
 import { getFieldError } from "@/utilities/getFieldError.util";
 import { SealCheck, Siren } from "@phosphor-icons/react";
 import { toast } from "sonner";
@@ -79,7 +79,7 @@ export default function DeleteExpenseForm({ closeModal }: DeleteExpenseForm) {
             type="button"
             value="Eliminar Gasto"
             classname="w-auto p-3 rounded-2xl flex flex-row items-center justify-center gap-2 bg-green-500 hover:bg-green-800 font-roboto text-xl cursor-pointer transition-colors duration-300 shadow-md text-white"
-            method={() => dispatch()}
+            method={() => startTransition(() => dispatch())}
           />
         </div>
 

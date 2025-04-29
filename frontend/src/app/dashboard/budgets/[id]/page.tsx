@@ -1,3 +1,5 @@
+import Amount from "@/components/charts/Amount"
+import ProgressBar from "@/components/charts/ProgressBar"
 import AddExpenseButton from "@/components/dashboard/expenses/AddExpenseButton"
 import ExpenseMenu from "@/components/dashboard/expenses/ExpenseMenu"
 import Button from "@/components/ui/Button"
@@ -24,6 +26,18 @@ export default async function BudgetPage({ params }: { params: { id: string } })
   const { id } = await params
   const budget = await getBudget(id)
 
+  /** Calculo de el total de gastos */
+  const totalExpenses = budget.expenses.reduce((
+    total,
+    expense
+  ) => total + Number(expense.amount), 0)
+
+  /** Calculo del saldo disponible */
+  const totalAvailable = Number(budget.amount) - totalExpenses
+
+  /** Calculo del porcentaje */
+  const percentage = ((totalExpenses / Number(budget.amount)) * 100).toFixed(2)
+
   return (
     <>
       <div className='flex flex-col-reverse md:flex-row md:justify-between items-center'>
@@ -49,36 +63,65 @@ export default async function BudgetPage({ params }: { params: { id: string } })
       </div>
 
       <Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 md:justify-between gap-4 item py-4">
+          <div>
+            <ProgressBar percentage={Number(percentage)} />
+          </div>
+          
+          {/** Resultados */}
+          <div className="flex flex-col gap-3 justify-center md:items-start ">
+            <Amount
+              label="Presupuesto"
+              amount={budget.amount ? Number(budget.amount) : 0}
+              color="blue"
+            />
+
+            <Amount
+              label="Disponible"
+              amount={totalAvailable}
+              color="green"
+            />
+
+            <Amount
+              label="Consumido"
+              amount={totalExpenses}
+              color="red"
+            />
+          </div>
+        </div>
+      </Card>
+
+      <Card>
         {
           budget.expenses.length
             ? (
               <>
                 <ul role="list" className=" py-4 divide-y divide-gray-300 w-full px-4">
                   {
-                    budget.expenses.map((expense) =>(
+                    budget.expenses.map((expense) => (
                       <li key={expense.id} className="flex justify-between gap-x-6 p-5">
-                      <div className="flex min-w-0 gap-x-4">
-                        <div className="min-w-0 flex-auto space-y-2">
-                          <p className="text-2xl font-semibold leading-6 text-gray-800">
-                            {expense.name}
-                          </p>
-                          <p className="text-xl font-bold text-emerald-600">
-                            {formatCurrency(Number(expense.amount))}
-                          </p>
-                          <p className='text-gray-500 text-sm'>
-                            Agregado:{' '}
-                            <span className="font-bold">
-                              {formatDate(expense.updatedAt)}
-                            </span>
-                          </p>
+                        <div className="flex min-w-0 gap-x-4">
+                          <div className="min-w-0 flex-auto space-y-2">
+                            <p className="text-2xl font-semibold leading-6 text-gray-800">
+                              {expense.name}
+                            </p>
+                            <p className="text-xl font-bold text-emerald-600">
+                              {formatCurrency(Number(expense.amount))}
+                            </p>
+                            <p className='text-gray-500 text-sm'>
+                              Agregado:{' '}
+                              <span className="font-bold">
+                                {formatDate(expense.updatedAt)}
+                              </span>
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex shrink-0 items-center gap-x-6">
-                        <OptionMenuContainer>
-                          <ExpenseMenu expenseId={expense.id} />
-                        </OptionMenuContainer>
-                      </div>
-                    </li>
+                        <div className="flex shrink-0 items-center gap-x-6">
+                          <OptionMenuContainer>
+                            <ExpenseMenu expenseId={expense.id} />
+                          </OptionMenuContainer>
+                        </div>
+                      </li>
                     ))
                   }
                 </ul>
