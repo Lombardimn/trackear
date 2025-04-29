@@ -102,6 +102,14 @@ export const updatePasswordSchema = z.object({
   path: ["password_confirmation"]
 })
 
+export const profileFormSchema = z.object({
+  name: z.string()
+    .min(1, { message: 'Tu Nombre no puede ir vacio' }),
+  email: z.string()
+    .min(1, { message: 'El Email es obligatorio' })
+    .email({ message: 'Email no válido' }),
+})
+
 export const passwordValidationSchema = z.string().min(1, { message: 'La contraseña es obligatoria' })
 export const errorResponseSchema = z.object({ error: z.string() })
 export const successResponseSchema = z.string()

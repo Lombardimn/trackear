@@ -35,10 +35,10 @@ export class AuthController {
       })
 
       res.status(201).json('Cuenta creada correctamente')
-      
+
     } catch (error) {
-      console.error('Error al crear una cuenta ->>' ,error)
-      res.status(500).json({ 
+      console.error('Error al crear una cuenta ->>', error)
+      res.status(500).json({
         message: 'Hubo un error al crear una cuenta'
       })
     }
@@ -90,14 +90,14 @@ export class AuthController {
 
     if (!isPasswordValid) {
       const error = new Error('El password es incorrecto')
-      res.status(401).json({ 
+      res.status(401).json({
         error: error.message
       })
     }
 
     /** Generar token */
     const token = generateJWT(user.id)
- 
+
     res.status(200).json(token)
   }
 
@@ -210,5 +210,32 @@ export class AuthController {
     }
 
     res.status(200).json('Contraseña valida')
+  }
+
+  static updateUser = async (req: Request, res: Response) => {
+    const { name, email } = req.body
+    const { id } = req.user
+
+    try {
+      /** Validar si el email existe */
+      const userExists = await User.findOne({ where: { email } })
+
+      if (userExists && userExists.id !== id) {
+        const error = new Error('El email ya es utilizado por otro usuario')
+        res.status(409).json({
+          error: error.message
+        })
+      }
+
+      /** Actualizar el usuario */
+      await User.update({ name, email }, { where: { id } })
+      res.status(200).json('Usuario actualizado correctamente')
+
+    } catch (error) {
+      console.error('Error al actualizar el usuario ->>' ,error)
+      res.status(500).json({ 
+        message: 'Hubo un error al actualizar el usuario'
+      })
+    }
   }
 }

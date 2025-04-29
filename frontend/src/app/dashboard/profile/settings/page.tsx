@@ -1,4 +1,12 @@
-export default function SettingsPage() {
+import UpdateProfileForm from "@/components/profile/UpdateProfileForm";
+import Card from "@/components/ui/Card";
+import { verifySession } from "@/guards/dal.guard";
+
+export default async function SettingsPage() {
+  const {user} = await verifySession()
+
+
+
   return (
     <>
       <div className='w-full md:w-auto'>
@@ -7,6 +15,10 @@ export default function SettingsPage() {
           <span className="text-green-600">perfil</span>
         </p>
       </div>
+
+      <Card>
+        <UpdateProfileForm user={user} />
+      </Card>
     </>
   )
 }

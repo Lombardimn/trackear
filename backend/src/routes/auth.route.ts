@@ -84,6 +84,18 @@ router.get(
   AuthController.user
 )
 
+router.put(
+  '/user',
+  authenticate,
+  body('name')
+    .notEmpty().withMessage('El Nombre es requerido')
+    .isString().withMessage('El Nombre debe ser una cadena de texto'),
+  body('email')
+    .isEmail().withMessage('El email es invalido'),
+  handleInputErrors,
+  AuthController.updateUser
+)
+
 router.post(
   '/update-password',
   authenticate,
